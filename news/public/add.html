@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新闻发布</title>
+	<style>
+    	td,th{
+    		height: 25px;
+    		line-height: 25px;
+			padding: 3px 4px;
+			text-align: center;
+    	}
+		td a{
+			text-decoration: none
+		}
+	</style>
+</head>
+<body>
+	<form action='/save_add.html' method="post">
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="title" /></td>
+			</tr>
+			<tr>
+				<td>作者</td>
+				<td><input type="text" name="author" /></td>
+			</tr>
+			<tr>
+				<td>来源</td>
+				<td><input type="text" name="from" /></td>
+			</tr>
+			<tr>
+				<td>内容</td>
+				<td><textarea name='content' rows="5 cols="100></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="立即发布" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

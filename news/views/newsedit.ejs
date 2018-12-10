@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>新闻修改</title>
+	<style>
+    	td,th{
+    		height: 25px;
+    		line-height: 25px;
+			padding: 3px 4px;
+			text-align: center;
+    	}
+		td a{
+			text-decoration: none
+		}
+	</style>
+</head>
+<body>
+	<form action='/save_edit.html' method="post">
+		<!-- 传隐藏的id 便于页面save_edit.html接收id保存修改后的数据-->
+		<input type="hidden" name="id" value="<%=news._id%>">
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td>标题</td>
+				<td><input type="text" name="title" value="<%=news.title%>" /></td>
+			</tr>
+			<tr>
+				<td>作者</td>
+				<td><input type="text" name="author" value="<%=news.author%>"  /></td>
+			</tr>
+			<tr>
+				<td>来源</td>
+				<td><input type="text" name="from" value="<%=news.author%>" /></td>
+			</tr>
+			<tr>
+				<td>内容</td>
+				<td><textarea name='content' rows="5 cols="100><%=news.content%></textarea></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td><input type="submit" value="立即发布" /></td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>

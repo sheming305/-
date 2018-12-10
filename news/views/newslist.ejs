@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>新闻列表</title>
+    <style>
+    	table{
+    		width: 800px;
+    		border-collapse:collapse;
+    		border: 1px solid #ccc;
+    	}
+    	td,th{
+    		height: 25px;
+    		border: 1px solid #ccc;
+    		line-height: 25px;
+			padding: 3px 4px;
+			text-align: center;
+    	}
+		td a{
+			text-decoration: none;
+			color: #999;
+		}
+    </style>
+  </head>
+  <body>
+   <a href="/add.html">新增</a>
+   <table cellpadding="0" cellspacing="0">
+   		<tr>
+   			<th>标题</th>
+   			<th>作者</th>
+   			<th>来源</th>
+   			<th>时间</th>
+   			<th>操作</th>
+   		</tr>
+   		<%for(var i in list){%>
+   		<tr>
+   			<td><a href="#"><%= list[i].title %></a></td>
+   			<td><%= list[i].author %></td>
+   			<td><%= list[i].from %></td>
+   			<td><%= list[i].time %></td>
+   			<td>
+   				<a href="/edit.html?id=<%= list[i]._id %>">修改</a>
+   				<a href="/del.html?id=<%= list[i]._id %>">删除</a>
+   			</td>
+   		</tr>
+   		<%}%>
+   </table>
+  </body>
+</html>
