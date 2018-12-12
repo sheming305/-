@@ -1,0 +1,62 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<style>
+		span{
+			color:  red;
+			font-size:  66px;
+			margin-left: 25px
+		}
+	</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<body>
+	<div id="app">
+		<span>还有</span>
+		<span><!-- {{ `${day}天 ${hr}小时 ${min}分钟 ${sec}秒` }} -->{{day}}<span>天</span>{{hr}}小时{{min}}分{{sec}}秒</span>   
+		<span>中秋放假</span>
+		<el-button type="primary" :loading="true">倒计时中</el-button>
+		
+	</div>
+</body>
+<script>
+new Vue({
+  el: "#app",
+  data() {
+    return {
+      day: 0, //天
+      hr: 0,  //小时
+      min: 0, // 分钟
+      sec: 0 // 秒
+   
+    }
+  },
+  mounted: function () {
+    this.countdown()
+  },
+  methods: {
+    countdown() {
+      const end = Date.parse(new Date("2018-9-22"))
+      const now = Date.parse(new Date())
+      const msec = end - now
+      let day = parseInt(msec / 1000 / 60 / 60 / 24)
+      let hr = parseInt(msec / 1000 / 60 / 60 % 24)
+      let min = parseInt(msec / 1000 / 60 % 60)
+      let sec = parseInt(msec / 1000 % 60)
+      this.day = day
+      this.hr = hr > 9 ? hr : "0" + hr
+      this.min = min > 9 ? min : "0" + min
+      this.sec = sec > 9 ? sec : "0" + sec
+      const that = this
+      setTimeout(function () {
+        that.countdown()
+      }, 1000)
+    }
+  }
+})
+</script>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+	<style>
+	.register-msg-btn{
+    display: inline-block;
+    width: 150px;
+    height:  25px;
+    text-align:  center;
+    background: green;
+    padding: 5px 10px;
+    color: #fff;
+  }
+  .form-control{
+    display: inline-block;
+    width: 150px;
+    height:  25px;
+    padding-left: 5px;
+  }
+	</style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<body>
+  <div id="app" style="width: 300px;"> 
+      <span class="register-msg-btn" v-show="show" @click="getCode">发送验证码</span> 
+      <span class="register-msg-btn" v-show="!show">{{count}} s</span> 
+      <input type="text" class="form-control" placeholder="请输入验证码"/> 
+      <span class="glyphicon glyphicon-font form-control-feedback" /> 
+  </div> 
+</div>
+</body>
+<script>
+ new Vue({
+  el:'#app', 
+  data:{   
+  show:true,  
+  timer:null,
+  count:''
+  }, 
+  methods:{  
+  getCode(){
+   this.show = false;
+   const TIME_COUNT = 10;   
+   if (!this.timer) {    
+   this.count = TIME_COUNT;    
+   this.show = false;    
+   this.timer = setInterval(() => {    
+    if (this.count > 0 && this.count <= TIME_COUNT) {     
+    this.count--;     
+    } else {     
+    this.show = true;     
+    clearInterval(this.timer);     
+    this.timer = null;     
+    }    
+   }, 1000)    
+   }  
+  }  
+  }
+ });
+</script>
+</html>

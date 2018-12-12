@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+</head>
+<body>
+	<div id="app">
+    <el-tree
+    :data="data2"
+    :props="defaultProps"
+    show-checkbox
+    node-key="id"
+    default-expand-all
+    :expand-on-click-node="false"
+    :render-content="renderContent">
+    </el-tree>
+  </div>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script>
+new Vue({
+  el: "#app",
+  data() {
+    return {
+      // 上面的data2从后台接口拿，也就是下面这个data  接口请求成功后可以直接写成 this.data2 = res.result
+       data2: [{
+          id: 1,
+          label: '一级 1',
+          children: [{
+            id: 4,
+            label: '二级 1-1',
+            children: [{
+              id: 9,
+              label: '三级 1-1-1'
+            }, {
+              id: 10,
+              label: '三级 1-1-2'
+            }]
+          }]
+        }, {
+          id: 2,
+          label: '一级 2',
+          children: [{
+            id: 5,
+            label: '二级 2-1'
+          }, {
+            id: 6,
+            label: '二级 2-2'
+          }]
+        }, {
+          id: 3,
+          label: '一级 3',
+          children: [{
+            id: 7,
+            label: '二级 3-1'
+          }, {
+            id: 8,
+            label: '二级 3-2'
+          }]
+        }],
+        defaultProps: {
+          children: 'children',
+          label: 'label'
+        }
+    }
+  },
+  methods: {
+     append(store, data) {
+        store.append({ id: id++, label: 'testtest', children: [] }, data);
+      },
+
+      remove(store, data) {
+        store.remove(data);
+      },
+      renderContent:function(createElement, { node, data, store }) {
+       var self = this;
+       return createElement('span', [
+         createElement('span', node.label),
+         createElement('span', {attrs:{
+           style:"float: right"
+         }},[
+           createElement('a',{attrs:{
+            style:"color: red; border: none;margin-left:15px;font-size:14px"
+           },on:{
+             click:function() {
+               console.info("点击了节点id为" + data.id + "的添加按钮");
+                // 这是写增加按钮接口，可以用jq写,要引入jq
+             }
+           }},"添加"),
+           createElement('a',{attrs:{
+            style:"color: green; border: none;margin-left:15px;font-size:14px"
+           },on:{
+             click:function() {
+               console.info("点击了节点id为" + data.id + "的删除按钮")
+
+               self.$confirm('此操作将永久删除该文件, 是否继续?', '提示', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  type: 'warning'
+                }).then(() => {
+                  // 删除按钮接口请求写在这里，可以用jq写
+
+                  self.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                  });
+                }).catch(() => {
+                  self.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                  })       
+                })
+             }
+           }},"删除"),
+         ]),
+       ]);
+     }
+  }
+})
+</script>
+</html>
